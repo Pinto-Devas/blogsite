@@ -77,7 +77,14 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'blogsite-sql'),
+        'USER': os.getenv('DB_USER', 'blogsite_sql_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'HST7wNfmuWiWp4klmzIWGaWKwnv7svrs'),
+        'HOST': os.getenv('DB_HOST', 'dpg-csvei756l47c738t9bg0-a'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+    }
 }
 
 
