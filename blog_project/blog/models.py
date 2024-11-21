@@ -6,6 +6,7 @@ class Post(models.Model):
   title = models.CharField(max_length=200)
   content = models.TextField()
   created_at = models.DateTimeField(auto_now_add=True)
+  categories = models.ManyToManyField('Category', related_name='posts')
 
   def __str__(self):
     return self.title
@@ -18,3 +19,10 @@ class Comment(models.Model):
 
   def __str__(self):
     return f'Comment by {self.author} on {self.post}'
+  
+class Category(models.Model):
+  name = models.CharField(max_length=100, unique=True)
+  description = models.TextField(blank=True, null=True)
+
+  def __str__(self):
+    return self.name

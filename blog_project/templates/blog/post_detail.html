@@ -7,6 +7,12 @@
   <a href="{% url 'post_delete' post.pk %}">Excluir</a> |
   <a href="{% url 'post_list' %}">Voltar</a>
   <hr>
+  <h2>Categorias:</h2>
+  <ul>
+    {% for category in post.categories.all %}
+      <li><a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a></li>
+    {% endfor %}
+  </ul>
   <h3>Comentários</h3>
   <ul>
     {% for comment in comments %}

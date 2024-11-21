@@ -1,0 +1,10 @@
+<h1>Categoria: {{ category.name }}</h1>
+<p>{{ category.description }}</p>
+
+<h2>Posts:</h2>
+<ul>
+  {% for post in posts %}
+    <li><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+<a href="javascript:history.back()">Voltar</a>

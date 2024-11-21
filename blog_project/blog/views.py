@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.shortcuts import get_object_or_404
-from .models import Post, Comment
+from django.shortcuts import get_object_or_404, render
+from .models import Post, Comment, Category
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 from .forms import CommentForm
@@ -60,3 +60,12 @@ class CommentCreateView(CreateView):
     context = super().get_context_data(**kwargs)
     context['post'] = get_object_or_404(Post, pk=self.kwargs['pk'])
     return context
+
+def category_list(request):
+  categories = Category.objects.all()
+  return render(request, 'blog/category_list.html', {'categories': categories})
+
+def category_detail(request, pk):
+  category = get_object_or_404(Category, pk=pk)
+  posts = category.posts.all()
+  return render(request, 'blog/category_detail.html', {'category': category, 'posts': posts})
