@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Novo Comentário</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+  </form>
+  <a href="{% url 'post_detail' pk=post.pk %}">Cancelar</a>
+{% endblock %}

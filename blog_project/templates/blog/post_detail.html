@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
   <h2>{{ post.title }}</h2>
-  <p>{{ post.content|safe }}</p>
-  <small>Publicado em {{ post.created_at|date:"d M Y H:i" }}</small>
+  <p>{{ post.content }}</p>
   <hr>
-  <a href="{% url 'post_update' post.pk %}">Editar</a>
-  <a href="{% url 'post_delete' post.pk %}">Deletar</a>
+  <a href="{% url 'post_update' post.pk %}">Editar</a> |
+  <a href="{% url 'post_delete' post.pk %}">Excluir</a> |
   <a href="{% url 'post_list' %}">Voltar</a>
+  <hr>
+  <h3>Comentários</h3>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        <strong>{{ comment.author.username }}</strong> - {{ comment.created_at|date:"d M Y H:i" }}<br>
+        {{ comment.text }}
+      </li>
+    {% empty %}
+      <li>Sem comentários ainda.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'comment_create' post.pk %}">Adicionar Comentário</a>
 {% endblock %}
